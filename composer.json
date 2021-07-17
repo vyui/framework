@@ -1,0 +1,28 @@
+{
+    "name": "vyui/framework",
+    "description": "The Vyui Fullstack Framework. Pronounced view-e. (Experimental and Educational).",
+    "keywords": ["framework", "vyui"],
+    "support": {
+        "issues": "https://github.com/vyui/framework/issues",
+        "source": "https://github.com/vyui/framework"
+    },
+    "authors": [
+        {
+            "name": "Liam Taylor",
+            "email": "liamtaylor@vyui.co.uk"
+        }
+    ],
+    "require": {
+        "php": "^8.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Radiate\\": "src/Radiate/"
+        }
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
