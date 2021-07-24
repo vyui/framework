@@ -16,6 +16,9 @@
         "php": "^8.0"
     },
     "autoload": {
+        "files": [
+            "src/Radiate/Foundation/helpers.php"
+        ],
         "psr-4": {
             "Radiate\\": "src/Radiate/"
         }
