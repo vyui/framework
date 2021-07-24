@@ -2,6 +2,7 @@
     "name": "vyui/framework",
     "description": "The Vyui Fullstack Framework. Pronounced view-e. (Experimental and Educational).",
     "keywords": ["framework", "vyui"],
+    "license": "MIT",
     "support": {
         "issues": "https://github.com/vyui/framework/issues",
         "source": "https://github.com/vyui/framework"
