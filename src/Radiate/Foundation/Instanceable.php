@@ -2,7 +2,7 @@
 
 namespace Radiate\Foundation;
 
-trait Instance
+trait Instanceable
 {
     protected static $instance;
 
