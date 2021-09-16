@@ -46,7 +46,7 @@ class Router
         try {
             $response = $this->findRoute($request)->dispatchRoute();
         } catch (Exception $exception) {
-            
+            throw new Exception('404???');
         }
 
         return $response;

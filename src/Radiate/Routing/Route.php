@@ -130,7 +130,16 @@ class Route
      */
     public function setHandler(string|array|Closure $handler): static
     {
-        $this->handler = $handler;
+        if ($handler instanceof Closure) {
+            $this->handler = $handler;
+        }
+
+        if (is_array($handler) || is_string($handler)) {
+            [$controller, $method] = is_array($handler) ? $handler : explode('@', $handler);
+            $this->handler = function () use ($controller, $method) {
+                return (new ($controller))->{$method}();
+            };
+        }
 
         return $this;
     }
@@ -151,8 +160,12 @@ class Route
     {
         preg_match_all("#{$this->uriRegex}#", $request->normaliseUri(), $matches);
 
+        if (empty(array_filter($matches, fn($match): bool => ! empty($match)))) {
+            return false;
+        }
+
         foreach ($matches as $match) {
-            if ($match[0] !== $request->normaliseUri()) {
+            if (! empty($match[0]) && $match[0] !== $request->normaliseUri()) {
                 $this->parameters[$this->parameters[$key]] = $match[0] !== '' ? $match[0] : null;
                 unset($this->parameters[$key]);
                 $key ++;
@@ -189,15 +202,6 @@ class Route
 
     public function dispatchRoute(): Response
     {
-        $handler = $this->handler;
-
-        if (is_array($handler) || is_string($handler)) {
-            [$controller, $method] = is_array($handler) ? $handler : explode('@', $handler);
-            $handler = function () use ($controller, $method) {
-                return (new ($controller))->{$method}();
-            };
-        }
-
-        return new Response($handler());
+        return new Response(($this->handler)());
     }
 }

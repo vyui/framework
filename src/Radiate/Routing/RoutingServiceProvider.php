@@ -11,7 +11,7 @@ class RoutingServiceProvider extends ServiceProvider
      *
      * @var string|null
      */
-    protected string|null $namespace;
+    protected string|null $namespace = '\App\Http\Controllers;';
 
     /**
      * Register the application service

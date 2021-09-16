@@ -1,6 +1,6 @@
 <?php
 
-namespace Radiate\View\ViewEngine;
+namespace Radiate\View\Engine;
 
 use Radiate\View\View;
 

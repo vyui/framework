@@ -44,14 +44,29 @@ class Kernel
      */
     public function handle(Request $request): Response
     {
-        $response = $this->sendRequestThroughRouter($request);
-
         try {
+            $response = $this->sendRequestThroughRouter($request);
         } catch (Throwable $exception) {
+            // todo if we are currently in a position of being on an application that's in developer mode then we are
+            // going to want the user to be able to see some error messages, otherwise, we are going to want to display
+            // the route to a simple error page, which then gets reported.
+            // todo (comprehensive)
+            // build a response of which referrs to the error (developer)
+            // build a response of which referrs to the error (non developer)
             $response = $this->renderException($request, $exception);
         }
 
         return $response;
+    }
+
+    /**
+     * Report the Exception that has been thrown.
+     *
+     * @param Throwable $exception
+     */
+    private function reportException(Throwable $exception)
+    {
+        
     }
 
     /**
@@ -69,6 +84,8 @@ class Kernel
 
     protected function renderException($request, $exception)
     {
-        return new Response('There was a problem');
+        $this->reportException($exception);
+
+        return new Response($exception);
     }
 }

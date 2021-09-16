@@ -18,20 +18,45 @@ if (! function_exists('app')) {
 }
 
 if (! function_exists('base_path')) {
+    /**
+     * @param string $path
+     * @return string
+     */
     function base_path(string $path = ''): string {
         return app()->basePath($path);
     }
 }
 
 if (! function_exists('dd')) {
+    /**
+     * @param ...$params
+     */
     function dd(...$params): void {
-        var_dump($params);
+        echo '<pre>';
+            var_dump($params);
+        echo '</pre>';
         die();
     }
 }
 
 if (! function_exists('view')) {
+    /**
+     * @param string $template
+     * @param array $data
+     * @return \Radiate\View\View
+     */
     function view(string $template, array $data = []) : \Radiate\View\View {
         static $manager;
+    }
+}
+
+if (! function_exists('config')) {
+    /**
+     * @param string $key
+     * @param mixed|null $default
+     * @return mixed
+     */
+    function config(string $key, mixed $default = null): mixed {
+        return app()->make('config')->get($key, $default);
     }
 }

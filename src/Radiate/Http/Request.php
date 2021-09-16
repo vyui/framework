@@ -41,7 +41,7 @@ class Request
     {
         return $this->uri;
     }
-
+    
     public function normaliseUri(): string
     {
         return preg_replace(

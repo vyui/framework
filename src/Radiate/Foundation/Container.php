@@ -19,16 +19,6 @@ class Container
     private array $resolved;
 
     /**
-     * @var array
-     */
-    protected array $aliases;
-
-    /**
-     * @var array
-     */
-    protected array $abstractAliases;
-
-    /**
      * @param $abstract
      * @param array $parameters
      * @return mixed
@@ -106,14 +96,11 @@ class Container
     }
 
     /**
-     * @param string $alias
-     * @return bool
+     * Call a callable action from the container.
+     *
+     * @param callable $callback
+     * @return mixed
      */
-    public function isAliased(string $alias): bool
-    {
-        return isset($this->aliases[$alias]);
-    }
-
     public function call(callable $callback)
     {
         return $callback($this);
